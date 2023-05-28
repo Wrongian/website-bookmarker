@@ -10,7 +10,6 @@ from blueprints.search import search_blueprint
 from models.category import Category
 from backups import backup
 #env vars
-PORT = os.environ.get("PORT")
 
 #register blueprints
 app.register_blueprint(main_blueprint,url_prefix= "/")
@@ -45,4 +44,4 @@ if __name__ == "__main__":
     #create da categories
     create_categories()
     #start the app
-    app.run(debug=True,port=PORT,host="127.0.0.1") #use_reloader = False`` 
+    app.run(debug=True,port=app.config["PORT"],host="127.0.0.1") #use_reloader = False`` 

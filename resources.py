@@ -19,6 +19,7 @@ app.config["DB_LOCATION"] = "instance/test.db"
 app.config["BACKUP_FOLDER"] = "instance/backups"
 app.config["IS_DEBUG"] = True
 app.config["NUM_BACKUPS"] = 20
+app.config["PORT"] = 5001
 
 
 #init db

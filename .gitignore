@@ -2,3 +2,4 @@
 media/
 test.py
 instance/
+*.lnk

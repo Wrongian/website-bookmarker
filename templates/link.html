@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}link{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+{% if link_text%} 
+<span>{{link_text}}</span>
+{%endif%}
+{%if media_id%}
+<img src="{{ url_for("media.see_media", media_id=media_id) }}" class="img-fluid">
+{%else%}
+<img src="{{ url_for("media.alt_media") }}" class="img-fluid">
+{%endif%}
+{% endblock content %}

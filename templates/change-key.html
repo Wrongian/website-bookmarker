@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Change Key{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+{%set form = forms.get_form("change_key_form")%}
+<div class="p-2">
+<h2>Change Key</h2>
+<form id="makeKeyForm" method="post" enctype="multipart/form-data" action="{{ url_for("main.modify_key") }}">
+    {{form.csrf_token}}
+    <div class="form-group">
+      <p class="text-custom">{{form.old_key.label}}:</p>
+    {{form.old_key(class_="form-control",id_="form-old_key")}}
+      {% for error in form.old_key.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+    {{form.csrf_token}}
+    <div class="form-group">
+      <p class="text-custom">{{form.key.label}}:</p>
+    {{form.key(class_="form-control",id_="form-key")}}
+      {% for error in form.key.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+
+    <button type="submit" class = "btn-custom">Submit New Key</button>
+</form>
+</div>
+{% endblock content %}

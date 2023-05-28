@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Make Key{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+{%set form = forms.get_form("make_key_form")%}
+<div class="p-2">
+<h2>Create Key</h2>
+<form id="makeKeyForm" method="post" enctype="multipart/form-data" action="{{ url_for("main.make_key") }}">
+    {{form.csrf_token}}
+    <div class="form-group">
+      <p class="text-custom">{{form.key.label}}:</p>
+    {{form.key(class_="form-control",id_="form-key")}}
+      {% for error in form.key.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+    <button type="submit" class = "btn-custom">Submit Key</button>
+</form>
+</div>
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% macro category_form(form_action,form) %}
+<form id="categoryForm" method="post" enctype="multipart/form-data" action="{{ form_action }}">
+    {{form.csrf_token}}
+    <div class="form-group">
+        <p class="text-custom">{{form.name.label}}</p>
+        {{form.name(class_="form-control",id_="form-name")}}
+        {% for error in form.name.errors %}
+        <ul>
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+    </div>
+    <div class="form-group">
+        <p class="text-custom">{{form.media.label}} </p>
+        {{form.media(class_="form-control",id_="fileinput")}}
+        {% for error in form.media.errors %}
+        <ul>
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+    </div>
+    <small class="text-custom">maximum attachment size: 8mb.</small>
+    <br>
+    <small class="text-custom">allowed file types: png, jpeg, webp, jpg, gif, mp4</small>
+</form>
+
+
+{% endmacro %}

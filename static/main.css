@@ -1,0 +1,135 @@
+navbar-brand{
+    color:rgb(103, 244, 103);
+    display: block;
+    font-weight: 800;
+}
+nav {
+    margin: 0 auto;
+    padding: 50px 0;
+  }
+.nav-link{
+    color: rgb(103, 244, 103);
+    display: block;
+    padding: 15px;
+    font-weight: 800;
+    margin: 0 0.10em;
+}
+.embed-img-video{
+    max-width: 15em; 
+    max-height: 20em;
+}
+
+.embed-src-img{
+    max-width: 5em; 
+    max-height: 5em;
+}
+
+.embed-div{
+    border-style: solid;
+}
+
+input, textarea, select{
+    background-color: black;
+    color:rgb(103, 244, 103);
+    border-style: solid;
+    border-color: rgb(103, 244, 103);
+    accent-color: grey;
+}
+
+input[type=text],input[type=url]{
+  background-color : black ;
+  color: rgb(103, 244, 103);
+}
+
+input[type=text]:focus,input[type=url]:focus,input[type=text]:valid, input[type=file],input[type=file]:focus,input[type=number],input[type=number]:focus{
+  background-color : black ;
+  color: rgb(103, 244, 103);
+}
+
+input[type="file"]::file-selector-button{
+  background-color : black ;
+  color: rgb(103, 244, 103);
+
+}
+input[type="file"]::file-selector-button:hover{
+  background-color : black ;
+  color: rgb(103, 244, 103);
+}
+
+
+.custom-select select{
+background-color : black ;
+  color: rgb(103, 244, 103);
+}
+
+.nav-link:hover{
+    color: #fff;
+    z-index: 1;
+}
+  
+.text-custom{
+    color:rgb(103, 244, 103);
+}
+.text-custom-secondary{
+    color:rgb(160, 234, 254);
+}
+
+
+.navbar{
+    background-color: black;
+}
+
+.text-body{
+    color:red;
+}
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color:yellow;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  a {
+    color:yellow;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover{
+    color: rgb(103, 244, 103);
+    text-decoration: underline;
+    padding: 12px 16px;
+    display: block;
+}
+
+.btn-custom {
+  color: rgb(103, 244, 103);
+  background-color: black;
+  border-color: rgb(103, 244, 103);
+  border: 4px
+}
+  
+.form-control,.form-control:focus{
+  background-color: black;
+  color: rgb(103, 244, 103);
+}
+p,h1,h2,h3,h4,h5,th,td{
+  color: rgb(103, 244, 103);
+}

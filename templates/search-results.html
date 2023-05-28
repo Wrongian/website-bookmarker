@@ -1,0 +1,24 @@
+<h3>{{length}} Search Results</h3>
+<table class="table table-striped custab">
+  <thead>
+      <tr>
+         <th>Category Name</th>
+         <th>Header Name</th>
+         <th>Name</th>
+         <th>Link Text</th>
+      </tr>
+  </thead>
+  <tbody>
+{% for data in search_data%}  
+    {%set link = data["link"]%}
+    {%set header = data["header"]%}
+    {%set category = data["category"]%}
+   <tr>
+    <td>{{category.name}}</td>
+    <td>{{header.name}}</td>
+    <td>{{link.name}}</td>
+    <td><a href = {{link.link_text}}>{{link.link_text}}</a></td>
+   </tr>
+{% endfor %}
+</tbody>
+</table>

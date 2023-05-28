@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+{%set form = forms.get_form("search_form")%}
+<h1 align="center">Search</h1>
+<div class="search-box p-3">
+    {%if is_encrypted%}
+    <form onsubmit="return false" id="searchForm" method="post" enctype="multipart/form-data" action="{{ url_for("search.e_search")}}">
+    {%else%}
+    <form onsubmit="return false" id="searchForm" method="post" enctype="multipart/form-data" action="{{ url_for("search.search")}}">
+    {%endif%} 
+    {{form.csrf_token}}
+    <div class="form-group">
+      <p>{{form.link_text.label}}</p>
+    {{form.link_text(class_="form-control",id_="form-link_text")}}
+      {% for error in form.link_text.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+  <div class="form-group">
+      <p>{{form.name.label}}</p>
+    {{form.name(class_="form-control",id_="form-name")}}
+      {% for error in form.name.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+    <div class="form-group">
+      <p>{{form.page.label}}</p>
+    {{form.page(class_="form-control",id_="form-page")}}
+      {% for error in form.page.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+</form>
+</div>
+<div class="p-3" id="search-result"></div>
+
+<script>
+    $(document).ready(function(){
+        send_data()
+        function send_data(){
+                $.ajax({
+                url:$("#searchForm").attr("action"),
+                type:"POST",
+                data:$("#searchForm").serialize(),
+                success:function(response){
+                $("#search-result").empty()
+                $("#search-result").append(response.search_results)
+                return false
+            }
+        })
+    }
+    $("#form-link_text").keyup(function(e){
+        
+        e.preventDefault()
+            send_data()
+        }
+        )
+    $("#form-name").keyup(function(e){
+
+        e.preventDefault()
+        send_data()
+    }
+    )
+    var page = $("#form-page").val()
+    $("#form-page").on("keyup change click",function(e){
+        if(this.value !== page){
+            value = this.value
+            e.preventDefault()
+            send_data()
+        }
+        
+    }
+    )
+    })
+</script>
+
+{% endblock content %}

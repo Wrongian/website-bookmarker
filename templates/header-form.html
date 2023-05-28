@@ -1,0 +1,19 @@
+{% macro header_form(form_action,form) %}
+<form  id="headerForm" method="post" enctype="multipart/form-data" action="{{ form_action }}">
+    {{form.csrf_token}}
+    <div class="form-group">
+      <p class="text-custom">{{form.name.label}}:</p>
+    {{form.name(class_="form-control",id_="form-name")}}
+      {% for error in form.name.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+</form>
+<script>
+  window.addEventListener('paste', e => {
+    const fileInput = document.getElementById("fileInput");
+    fileInput.files= e.clipboardData.files
+    });
+</script>
+{% endmacro %}

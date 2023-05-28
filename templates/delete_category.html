@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Delete Category{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+<div class = "p-3">
+<p>change is irreversible</p>
+{%set form= forms.get_form("delete_category_form")%}
+{%if is_encrypted%}
+<form  id="deleteCategoryForm" method="post" enctype="multipart/form-data" action="{{ url_for("main.e_remove_category") }}">
+{%else%}
+<form  id="deleteCategoryForm" method="post" enctype="multipart/form-data" action="{{ url_for("main.remove_category") }}">
+{%endif%}
+    {{form.csrf_token}}
+    <div class="form-group">
+      <p class = "text-custom">{{form.category.label}}</p>
+    {{form.category(class_="form-control custom-select",id_="form-category")}}
+      {% for error in form.category.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+</form>
+<button class="btn-custom" id="submitbutton"type="submit" form="deleteCategoryForm">Submit</button>
+
+</div>
+{% endblock content %}

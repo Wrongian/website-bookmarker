@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Landing Page{% endblock title %}
+{% block head %}
+{% endblock head %}
+
+{%block navbar_end%}
+<ul class="navbar-nav">
+  {%if is_encrypted%}
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('main.e_remove_category')}}">Remove Category</a>
+            </li>
+            </ul>
+  {%else%}
+      <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('main.remove_category')}}">Remove Category</a>
+            </li>
+            </ul>
+  {%endif%}
+{%if is_encrypted%}
+{%else%}
+<ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('main.enter_key')}}">Enter Key</a>
+            </li>
+            </ul>
+{%endif%}
+{%if is_encrypted%}
+<ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('main.remove_session_key')}}">Delete Key</a>
+            </li>
+            </ul>
+{%else%}
+{%endif%}
+{%if is_encrypted%}
+<ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('main.modify_key')}}">Change Key</a>
+            </li>
+            </ul>
+{%else%}
+{%endif%}
+
+
+{%endblock navbar_end%}
+{% block content %}
+{% set form_new_category = forms.get_form("category_form")%}
+<!--creating new link form-->
+      <div style=""  class="p-3">
+        <div class="">
+          <h5 class="text-custom">Add New Category</h5>
+        </div>
+        <div class="">
+          {% import "category-form.html" as category_form with context %}
+          {% if is_encrypted%}
+          {{category_form.category_form(url_for("category.create_new_e_category"),form_new_category)}}
+          {% else%}
+          {{category_form.category_form(url_for("category.create_new_category"),form_new_category)}}
+          {%endif%}
+        </div>
+        <div class="">
+          <button id="submitbuttonz"type="submit" class="btn-custom" form="categoryForm">Submit</button>
+        </div>
+      </div>
+    
+{%if is_encrypted%}
+{%set cat_link = "category.hidden_category" %}
+{%else %}
+{%set cat_link = "category.see_category"%}
+{%endif%}
+<div class="container">
+  <div class ="row">
+    {%for category in categories%}
+    <div class="col-sm-2">
+      <div class="row">
+    <a class="h1 text-center text-decoration-none" href="{{url_for(cat_link,category_id=category.id)}}">{{category.name}}</a>
+      </div>
+    <div class="row">
+    {%if category.media%}
+    <a class = "text-center" href="{{url_for(cat_link,category_id=category.id)}}"><img src="{{ url_for("media.see_media", media_id=category.media) }}" class="img-fluid rounded"></a>
+    {%else%}
+    <a class="text-center" href="{{url_for(cat_link,category_id=category.id)}}"><img src="{{ url_for("media.alt_media") }}" class="img-fluid rounded"></a>
+    {%endif%}
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+
+  </div>
+{% endblock content %}

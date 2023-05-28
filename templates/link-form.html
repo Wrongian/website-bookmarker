@@ -1,0 +1,44 @@
+{% macro link_form(form_action,form) %}
+<form  id="linkForm" method="post" enctype="multipart/form-data" action="{{ form_action }}">
+    {{form.csrf_token}}
+    <div class="form-group">
+				<p class="text-custom">{{form.header.label}}:</p>
+                {{form.header}}
+                {% for error in form.header.errors %} 
+            <ul> 
+                <li style="color:red;">{{ error }}</li>
+             {% endfor %}
+            </div>
+    <div class="form-group">
+      <p class="text-custom">{{form.link.label}}</p>
+    {{form.link(class_="form-control",id_="form-link")}}
+      {% for error in form.link.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+    </div>
+  <div class="form-group">
+      <p class = "text-custom">{{form.name.label}}</p>
+    {{form.name(class_="form-control",id_="form-name")}}
+      {% for error in form.name.error %} 
+  <ul> 
+      <li style="color:red;">{{ errors }}</li>
+   {% endfor %}
+    </div>
+
+    <div class="form-group">
+      <p class = "text-custom">{{form.media.label}} </p>
+      {{form.media(class_="form-control",id_="fileinput")}}
+      {% for error in form.media.errors %} 
+  <ul> 
+      <li style="color:red;">{{ error }}</li>
+   {% endfor %}
+        </div>
+  <small class="text-custom">maximum attachment size: 8mb.</small>
+        <br>
+        <small class="text-custom">allowed file types: png, jpeg, webp, jpg, gif, mp4</small>
+  
+
+</form>
+
+{% endmacro %}

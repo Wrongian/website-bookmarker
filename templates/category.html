@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+{% block title %}Category{% endblock title %}
+{% block head %}
+{% endblock head %}
+{% block content %}
+<!--Init Forms-->
+{%set form_header = forms.get_form("header_form")%}
+{%set form_link = forms.get_form("link_form")%}
+{%set form_rename_header = forms.get_form("rename_header_form")%}
+{%set form_move_header = forms.get_form("move_header_form")%}
+{%set form_move_link = forms.get_form("move_link_form")%}
+<!--back button-->
+<h1 class="text-custom h1 display-1 p-3">{{category.name}}</h1>
+<!--creating new header form-->
+<div style="" class="p-3">
+  <h5 class="text-custom title">Add New Header:</h5>
+  <div class="">
+    {% import "header-form.html" as header_form with context %}
+    {%if is_encrypted%}
+    {{header_form.header_form(url_for("category.e_new_header",category_id = category.id),form_header)}}
+    {%else%}
+    {{header_form.header_form(url_for("category.new_header",category_id = category.id),form_header)}}
+    {%endif%}
+  </div>
+  <div class="footer">
+    <button id="submitbuttonz" type="submit" class="btn-custom" form="headerForm">Submit</button>
+  </div>
+</div>
+
+<!--creating new link form-->
+<div style="" class="p-3">
+  <div class="">
+    <h5 class="text-custom">Add New Link</h5>
+  </div>
+  <div class="">
+    {% import "link-form.html" as link_form with context %}
+    {%if is_encrypted%}
+    {{link_form.link_form(url_for("category.e_new_link",category_id = category.id),form_link)}}
+    {%else%}
+    {{link_form.link_form(url_for("category.new_link",category_id = category.id),form_link)}}
+    {%endif%}
+  </div>
+  <div class="">
+    <button id="submitbuttonz" type="submit" class="btn-custom" form="linkForm">Submit</button>
+  </div>
+</div>
+
+<!--Displaying all this links in category-->
+{%for header in category.headers%}
+<div class="border border-5 p-2" style="" id="header-div{{header.id}}">
+  <h1 class="display-4">{{header.name}} <button style = "padding:0;font-size:10px;" data-id="{{header.id}}" class="edit-button"><img style="width:30px;height:30px;" src="{{url_for("static", filename = "images/edit.png")}}"></button></h1>
+  <!--Edit Header Stuff-->
+  <div style="display:none" class="edit-header-{{header.id}}">
+
+    <h5>Edit Header Settings:</h5>
+    <button data-id="{{header.id}}" id="move-up-header-button{{header.id}}">Down</button>
+    <button data-id="{{header.id}}" id="move-down-header-button{{header.id}}">Up</button>
+    <script>
+      //move up button
+      $("#move-up-header-button{{header.id}}").click(
+        function (e) {
+          id = $(this).data("id")
+          e.preventDefault()
+          //$('#myform-'+id).submit(); 
+          $.ajax({
+            type: 'POST',
+            {%if is_encrypted %}
+            url: "{{url_for('header.e_move_link_up',header_id = header.id)}}",
+            {%else %}
+            url: "{{url_for('header.move_link_up',header_id = header.id)}}",
+            {%endif %}
+          })
+        }
+      )
+      //move down button
+      $("#move-down-header-button{{header.id}}").click(
+        function (e) {
+          id = $(this).data("id")
+          e.preventDefault()
+          //$('#myform-'+id).submit(); 
+          $.ajax({
+            type: 'POST',
+            {%if is_encrypted %}
+            url: "{{url_for('header.e_move_link_down',header_id = header.id)}}",
+            {%else %}
+            url: "{{url_for('header.move_link_down',header_id = header.id)}}",
+            {%endif %}
+          })
+        }
+      )
+    </script>
+    <!--Deleting Header-->
+    <button data-id="{{header.id}}" id="delete-header-button{{header.id}}">Delete</button>
+    <!--Renaming Header-->
+    {%if is_encrypted%}
+    <form id="renameHeaderForm" method="post" enctype="multipart/form-data"
+      action="{{url_for('header.e_change_header_name',header_id = header.id)}}">
+      {%else%}
+      <form id="renameHeaderForm" method="post" enctype="multipart/form-data"
+        action="{{url_for('header.change_header_name',header_id = header.id)}}">
+        {%endif%}
+        {%set form = form_rename_header%}
+        {{form.csrf_token}}
+        <div class="form-group">
+          {{form.new_name.label}}
+          {{form.new_name(class_="form-control",id_="form-new_name")}}
+          {% for error in form.new_name.errors %}
+          <li style="color:red;">{{ error }}</li>
+          {% endfor %}
+        </div>
+        <button type="submit">Rename</button>
+      </form>
+      <!--Moving Header-->
+      <form id="moveHeaderForm" method="post" enctype="multipart/form-data"
+        {%if is_encrypted%}
+        action="{{url_for('header.e_move_to_category',header_id = header.id)}}">
+        {%else%}
+        action="{{url_for('header.move_to_category',header_id = header.id)}}">
+        {%endif%}
+        {%set form = form_move_header%}
+        {{form.csrf_token}}
+        <div class="form-group">
+          {{form.category.label}}
+          {{form.category(class_="form-control",id_="form-category")}}
+          {% for error in form.category.errors %}
+          <li style="color:red;">{{ error }}</li>
+          {% endfor %}
+        </div>
+        <button type="submit">Move</button>
+      </form>
+      <script>
+        $("#delete-header-button{{header.id}}").click(
+          function (e) {
+            id = $(this).data("id")
+            e.preventDefault()
+            //$('#myform-'+id).submit(); 
+            $.ajax({
+              type: 'POST',
+              {%if is_encrypted %}
+              url: "{{url_for('header.e_remove_header',header_id = header.id)}}",
+              {%else %}
+              url: "{{url_for('header.remove_header',header_id = header.id)}}",
+              {%endif %}
+            })
+            $("#header-div{{header.id}}").remove()
+          }
+        )
+      </script>
+  </div>
+
+  {%for link in header.links%}
+  <div class="border border-2 d-flex flex-column">
+    <div class="d-flex flex-row">
+      <div>
+        {%if link.media%}
+        <a rel="external" class="text-left" target="_blank" href="{{link.link_text}}"><img style="max-width:60px;"src="{{ url_for("media.see_media", media_id=link.media) }}" class="rounded img-fluid"></a>
+        {%else%}
+        <!-- <a rel="external" target="_blank" href = "{{link.link_text}}"><img style = "max-width:60px;" src="{{ url_for("media.alt_media") }}" class="rounded img-fluid"></a> -->
+        {%endif%}
+      </div>
+      <div class="">
+          {%if link.name%}
+        <div style = "white-space:nowrap">
+          <a style="display:inline-block" rel="external" target="_blank" href="{{link.link_text}}">{{link.name}}</a>
+          <button style="margin:0;padding:0;font-size:5px;display:inline-block" data-id="{{link.id}}" class="edit-button-link"><img style="width:20px;height:20px;" src="{{url_for("static", filename = "images/edit.png")}}"></button>
+        </div>
+        {%else%}
+        <div style = "white-space:nowrap">
+          <a style="display:inline-block" rel="external" target="_blank" href="{{link.link_text}}">{{link.link_text}}</a>
+        <button style="margin:0;padding:0;font-size:5px;display:inline-block" data-id="{{link.id}}" class="edit-button-link"><img style="width:20px;height:20px;" src="{{url_for("static", filename = "images/edit.png")}}"></button>
+        </div>
+        {%endif%}
+
+       
+      </div>
+    </div>
+    <div style="display:none" class="edit-link-{{link.id}}">
+      <h5>Edit Link</h5>
+      <button data-id="{{link.id}}" id="delete-link-button{{link.id}}">Delete</button>
+      <!--Moving Header-->
+      {%if is_encrypted%}
+      <form id="moveLinkForm" method="post" enctype="multipart/form-data"
+        action="{{url_for('link.e_move_to_header',link_id = link.id)}}">
+        {%else%}
+        <form id="moveLinkForm" method="post" enctype="multipart/form-data"
+          action="{{url_for('link.move_to_header',link_id = link.id)}}">
+          {%endif%}
+          {%set form = form_move_link%}
+          {{form.csrf_token}}
+          <div class="form-group">
+            {{form.header.label}}
+            {{form.header(class_="form-control",id_="form-header")}}
+            {% for error in form.header.errors %}
+            <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+          </div>
+          <button type="submit">Move</button>
+        </form>
+        <button data-id="{{link.id}}" id="move-up-link-button{{link.id}}">Down</button>
+        <button data-id="{{link.id}}" id="move-down-link-button{{link.id}}">Up</button>
+        <script>
+          
+
+          //move up button
+          $("#move-up-link-button{{link.id}}").click(
+            function (e) {
+              id = $(this).data("id")
+              e.preventDefault()
+              //$('#myform-'+id).submit(); 
+              $.ajax({
+                type: 'POST',
+                {%if is_encrypted%}
+                url: "{{url_for('link.e_move_link_up',link_id = link.id)}}",
+                {%else%}
+                url: "{{url_for('link.move_link_up',link_id = link.id)}}",
+                {%endif%}
+              })
+            }
+          )
+          //move down button
+          $("#move-down-link-button{{link.id}}").click(
+            function (e) {
+              id = $(this).data("id")
+              e.preventDefault()
+              //$('#myform-'+id).submit(); 
+              $.ajax({
+                type: 'POST',
+                {%if is_encrypted %}
+                url: "{{url_for('link.e_move_link_down',link_id = link.id)}}",
+                {%else%}
+                url: "{{url_for('link.move_link_down',link_id = link.id)}}",
+                {% endif %}
+              })
+            }
+          )
+
+          //delete link button
+          $("#delete-link-button{{link.id}}").click(
+            function (e) {
+              id = $(this).data("id")
+              e.preventDefault()
+              //$('#myform-'+id).submit(); 
+              $.ajax({
+                type: 'POST',
+                {%if is_encrypted %}
+                url: "{{url_for('link.e_remove_link',link_id = link.id)}}",
+                {%else %}
+                url: "{{url_for('link.remove_link',link_id = link.id)}}",
+                {%endif %}
+              })
+              $("#link-div{{link.id}}").remove()
+            }
+          )
+        </script>
+    </div> 
+   </div>
+  {%endfor%}
+</div>
+</div>
+{%endfor%}
+<script>
+  $(".edit-button").click(
+    function () {
+      id = $(this).data("id")
+      if ($(this).hasClass("selected")) {
+        $(this).css("filter", " hue-rotate(0deg)")
+        $(this).removeClass("selected")
+      } else {
+
+        $(this).css("filter", " hue-rotate(180deg)")
+        $(this).addClass("selected")
+      }
+      $(".edit-header-" + id).toggle()
+    }
+  )
+$(".edit-button-link").click(
+              function () {
+                id = $(this).data("id")
+                if ($(this).hasClass("selected")) {
+                  $(this).css("filter", " hue-rotate(0deg)")
+                  $(this).removeClass("selected")
+                } else {
+
+                  $(this).css("filter", " hue-rotate(180deg)")
+                  $(this).addClass("selected")
+                }
+                $(".edit-link-" + id).toggle()
+              }
+            )
+</script>
+{%endblock%}

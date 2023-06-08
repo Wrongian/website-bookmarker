@@ -83,6 +83,6 @@ def delete_category(category_id):
     category = get_category(category_id)
     if category:
         for header in category.headers:
-            delete_header(header)
+            delete_header(header.id)
         db.session.delete(category)
         db.session.commit()

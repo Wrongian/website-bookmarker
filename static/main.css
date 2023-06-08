@@ -69,6 +69,7 @@ background-color : black ;
   
 .text-custom{
     color:rgb(103, 244, 103);
+    font-size: smaller;
 }
 .text-custom-secondary{
     color:rgb(160, 234, 254);
@@ -87,6 +88,7 @@ background-color : black ;
   .dropdown {
     position: relative;
     display: inline-block;
+    font-size: small;
   }
   
   /* Dropdown Content (Hidden by Default) */
@@ -107,9 +109,10 @@ background-color : black ;
 
   a {
     color:yellow;
-    padding: 12px 16px;
+    padding: 0px 10px 0px 10px;
     text-decoration: none;
     display: block;
+    font-size: smaller;
   }
 
   .dropdown-content a:hover{
@@ -123,13 +126,20 @@ background-color : black ;
   color: rgb(103, 244, 103);
   background-color: black;
   border-color: rgb(103, 244, 103);
-  border: 4px
+  border: 4px;
+  font-size: x-small;
 }
   
 .form-control,.form-control:focus{
   background-color: black;
   color: rgb(103, 244, 103);
+  font-size: smaller;
+  padding-bottom: 0%;
+  padding-top: 0%;
+  margin-top: -15px;
+  
 }
-p,h1,h2,h3,h4,h5,th,td{
+p,h1,h2,h3,h4,h5,th,td, small{
   color: rgb(103, 244, 103);
+  font-size: x-small;
 }

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
+import json
 
 #init app
 app = Flask(__name__)
@@ -17,10 +18,30 @@ app.config["MEDIA_FOLDER"] = "media"
 app.config["DB_LOCATION"] = "instance/test.db"
 #make sure this is an empty folder
 app.config["BACKUP_FOLDER"] = "instance/backups"
-app.config["IS_DEBUG"] = True
-app.config["NUM_BACKUPS"] = 20
-app.config["PORT"] = 5001
 
+def create_config():
+    with open("config.json","w") as file:
+        config_dict = {}
+        #defaults 
+        config_dict["port"] = 5000
+        config_dict["num_backups"] = 20
+        config_dict["is_debug"] = False
+        file.write(json.dumps(config_dict))
+
+def get_config():
+    if os.path.isfile("config.json") == False:
+        create_config()
+    file = open("config.json","r")
+    config_dict = dict(json.loads(file.read()))
+    app.config["NUM_BACKUPS"] = config_dict["num_backups"]
+    app.config["PORT"] = config_dict["port"]
+    app.config["IS_DEBUG"] = config_dict["is_debug"]
+
+
+
+    
+
+get_config()
 
 #init db
 db = SQLAlchemy(app)

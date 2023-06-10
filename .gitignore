@@ -3,3 +3,4 @@ media/
 test.py
 instance/
 *.lnk
+config.json

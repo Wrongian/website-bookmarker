@@ -39,9 +39,11 @@ if __name__ == "__main__":
     #remove all testing stuff before debugging
     if app.config["IS_DEBUG"] == True:
         db.drop_all()
+        db.create_all()
+        create_categories()
+    else:
+        db.create_all()
     #create all tables
-    db.create_all()
     #create da categories
-    create_categories()
     #start the app
     app.run(debug=True,port=app.config["PORT"],host="127.0.0.1") #use_reloader = False`` 

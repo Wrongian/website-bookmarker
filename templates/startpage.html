@@ -40,11 +40,21 @@
             </ul>
 {%else%}
 {%endif%}
-
-
 {%endblock navbar_end%}
 {% block content %}
+
 {% set form_new_category = forms.get_form("category_form")%}
+
+<br>
+<input class = "form-control" id="paywallremover" placeholder="Paywall Link" type="text">
+<button class="btn-custom" onclick="paywall_link()">Submit</button>
+<script>
+function paywall_link(){
+  link =  $("#paywallremover").val()
+  window.open("https://12ft.io/"+link, "_blank")
+}
+
+</script>
 <!--creating new link form-->
       <div style=""  class="p-3">
         <div class="">

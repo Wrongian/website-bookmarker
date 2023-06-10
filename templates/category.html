@@ -149,7 +149,7 @@
   </div>
 
   {%for link in header.links%}
-  <div class="border border-2 d-flex flex-column">
+  <div id="link-div{{link.id}}" class="border border-2 d-flex flex-column">
     <div class="d-flex flex-row">
       <div>
         {%if link.media%}

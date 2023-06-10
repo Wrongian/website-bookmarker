@@ -21,6 +21,11 @@
     <br>
     <small class="text-custom">allowed file types: png, jpeg, webp, jpg, gif, mp4</small>
 </form>
-
+<script>
+  window.addEventListener('paste', e => {
+    const fileInput = document.getElementById("fileinput");
+    fileInput.files= e.clipboardData.files
+    });
+</script>
 
 {% endmacro %}

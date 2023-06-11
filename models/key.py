@@ -61,7 +61,7 @@ def key_required(f):
     @wraps(f)
     def func(*args,**kwargs):
         if "key" not in session:
-            return redirect(url_for("main.index"))
+            return redirect(url_for("main.enter_key"))
         return f(*args,**kwargs)
     return func
 

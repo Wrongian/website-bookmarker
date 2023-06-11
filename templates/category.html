@@ -48,7 +48,7 @@
 <!--Displaying all this links in category-->
 {%for header in category.headers%}
 <div class="border border-5 p-2" style="margin-top:-15px" id="header-div{{header.id}}">
-  <h4 style="margin-top:-10px;margin-bottom:-5px" class="display-5">{{header.name}} <button style = "padding:0px;font-size:4px;align-items:center" data-id="{{header.id}}" class="edit-button"><img style="width:30px;height:30px;" src="{{url_for("static", filename = "images/edit.png")}}"></button></h4>
+  <h4 style="margin-top:-10px;margin-bottom:-5px" class="display-5"><a class="link-dropdown-button" data-id="{{header.id}}" style="color:rgb(103,244,103);display:inline-block;">{{header.name}}</a><button style = "padding:0px;font-size:4px;align-items:center" data-id="{{header.id}}" class="edit-button"><img style="width:30px;height:30px;" src="{{url_for("static", filename = "images/edit.png")}}"></button></h4>
   <!--Edit Header Stuff-->
   <div style="display:none" class="edit-header-{{header.id}}">
 
@@ -147,7 +147,17 @@
         )
       </script>
   </div>
+  <script>
 
+    $(".link-dropdown-button").click(
+      function(e){
+        e.preventDefault()
+        id = $(this).data("id")
+        $("#links-div" +id).toggle()
+      }
+    )
+  </script>
+  <div style="display:none" id="links-div{{header.id}}">
   {%for link in header.links%}
   <div id="link-div{{link.id}}" class="border border-2 d-flex flex-column">
     <div class="d-flex flex-row">
@@ -255,6 +265,7 @@
     </div> 
    </div>
   {%endfor%}
+</div>
 </div>
 </div>
 {%endfor%}

@@ -43,5 +43,28 @@
     </nav>
         {% block content%}
             {% endblock content%}
+          <script>
+            document.addEventListener('keydown', function(event) {
+                if (event.code === 'KeyZ') {
+                if (!(event.target instanceof HTMLTextAreaElement) && !(event.target instanceof HTMLInputElement)) {
+                  window.location.href = "{{url_for("main.index")}}"
+                }
+            }
+            });
+              document.addEventListener('keydown', function(event) {
+                if (event.code === 'KeyX') {
+                if (!(event.target instanceof HTMLTextAreaElement) && !(event.target instanceof HTMLInputElement)) {
+                  window.location.href = "{{url_for("main.alt_index")}}"
+                }
+              }
+            });
+              document.addEventListener('keydown', function(event) {
+                if (event.code === 'KeyC') {
+                  if (!(event.target instanceof HTMLTextAreaElement) && !(event.target instanceof HTMLInputElement)) {
+                    window.location.href = "{{url_for("search.search")}}"
+                }
+              }
+            });
+          </script>
     </body>
 </html>

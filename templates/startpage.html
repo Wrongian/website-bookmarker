@@ -46,7 +46,8 @@
 {% set form_new_category = forms.get_form("category_form")%}
 
 <br>
-<input class = "form-control" id="paywallremover" placeholder="Paywall Link" type="text">
+<div class='px-3'>
+<input class="form-control" id="paywallremover" placeholder="Paywall Link" type="text">
 <button class="btn-custom" onclick="paywall_link()">Submit</button>
 <script>
 function paywall_link(){
@@ -55,8 +56,9 @@ function paywall_link(){
 }
 
 </script>
+</div>
 <!--creating new link form-->
-      <div style=""  class="p-3">
+      <div style=""  class="px-3">
         <div class="">
           <h5 class="text-custom">Add New Category</h5>
         </div>

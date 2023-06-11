@@ -147,16 +147,7 @@
         )
       </script>
   </div>
-  <script>
 
-    $(".link-dropdown-button").click(
-      function(e){
-        e.preventDefault()
-        id = $(this).data("id")
-        $("#links-div" +id).toggle()
-      }
-    )
-  </script>
   <div style="display:none" id="links-div{{header.id}}">
   {%for link in header.links%}
   <div id="link-div{{link.id}}" class="border border-2 d-flex flex-column">
@@ -299,4 +290,14 @@ $(".edit-button-link").click(
               }
             )
 </script>
+  <script>
+
+    $(".link-dropdown-button").click(
+      function(e){
+        e.preventDefault()
+        id = $(this).data("id")
+        $("#links-div" +id).toggle()
+      }
+    )
+  </script>
 {%endblock%}

@@ -1,5 +1,11 @@
 # Bookmarking Thing
 
+## How it looks like
+![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/87fb90e9-c7a9-46e3-a09a-789e4e075426)
+![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/fcb08829-0ff5-4f62-b83e-c3dde36a5867)
+![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/e9fa4a77-c601-4e2c-824f-f2d33c8bb121)
+
+
 ## How to Install
 1. Get Python 3.10
 2. Install pipenv on that specific ver of python

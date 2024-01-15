@@ -1,9 +1,12 @@
 # Bookmarking Thing
 
 ## How it looks like
+Main Page:
 ![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/87fb90e9-c7a9-46e3-a09a-789e4e075426)
+Inside a bookmark category:
 ![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/fcb08829-0ff5-4f62-b83e-c3dde36a5867)
 ![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/e9fa4a77-c601-4e2c-824f-f2d33c8bb121)
+Searching:
 ![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/ef0a7be8-76c6-4f83-986a-39aec807e0d9)
 
 

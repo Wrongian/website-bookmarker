@@ -1,16 +1,17 @@
 # Bookmarking Thing
-Encrypted bookmark/link manager(for my convenience because I didn't like the solutions out there). \
+Encrypted bookmark/link manager(for my convenience because I didn't like the solutions out there).\
+I may not be the best UI designer(I usually just take someone elses bootstrap : )  )
 
 
 
 ## How it looks like
 Main Page:
-![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/87fb90e9-c7a9-46e3-a09a-789e4e075426)
+![Imgur](https://i.imgur.com/cD1NM2d.png)
 Inside a bookmark category:
-![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/fcb08829-0ff5-4f62-b83e-c3dde36a5867)
-![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/e9fa4a77-c601-4e2c-824f-f2d33c8bb121)
+![Imgur](https://i.imgur.com/tbifkkQ.png)
+![Imgur](https://i.imgur.com/9RbwNTy.png)
 Searching:
-![image](https://github.com/Wrongian/website-bookmarker/assets/90535821/ef0a7be8-76c6-4f83-986a-39aec807e0d9)
+![Imgur](https://i.imgur.com/VXGtGJG.png)
 
 
 ## How to Install

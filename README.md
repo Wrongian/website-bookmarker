@@ -1,4 +1,7 @@
 # Bookmarking Thing
+Encrypted bookmark/link manager(for my convenience because I didn't like the solutions out there). \
+
+
 
 ## How it looks like
 Main Page:

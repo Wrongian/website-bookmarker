@@ -1,7 +1,7 @@
 # Bookmarking Thing
 
 Encrypted bookmark/link manager(for my convenience because I didn't like the solutions out there).\
-Very 5 sec thrown together UI since im the only one using it :3 \
+Very 5 sec thrown together UI since im the only one using it :3
 
 ## How it looks like
 
